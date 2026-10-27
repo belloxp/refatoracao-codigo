@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(160deg, #1a1033 0%, #2d1b5e 100%);
+    min-height: 100vh;
+    margin-top: 16px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+nav {
+    padding: 16px 8px;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e6defa;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color: rgba(0, 229, 255, 0.15);
+    color: #00e5ff;
+    border-radius: 8px;
+    transition: ease 0.4s;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+main, footer {
+    text-align: center;
+    color: #f3effc;
+}
+
+h1 {
+    font-size: 2.6rem;
+    color: #00e5ff;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 1.4rem;
+    color: #c9b8f5;
+}
+
+p {
+    margin-bottom: 16px;
+}
+
+.titulo_menu {
+    color: #ff4fd8;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input, button, select {
+    background-color: #120a26;
+    border: 2px solid #5b3fa8;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 6px;
+    color: #f3effc;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: bold;
+    width: 300px;
+    font-size: 1.1rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #00e5ff;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+
+label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #c9b8f5;
+}
+
+button {
+    cursor: pointer;
+    background-color: #ff4fd8;
+    color: #1a1033;
+    border: 2px solid #ff4fd8;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: transparent;
+    color: #ff4fd8;
+}
+
+.resposta {
+    font-size: 1.1rem;
+    color: #00e5ff;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+th {
+    font-weight: bold;
+    background-color: #5b3fa8;
+}
+
+th, td {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 10px 14px;
+    text-align: center;
+    color: #f3effc;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
