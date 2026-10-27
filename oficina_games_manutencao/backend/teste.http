@@ -1,0 +1,99 @@
+### Teste da Rota Raíz
+GET http://localhost:3000/
+Content-Type: application/json
+
+###
+
+### 1. Cadastrar Cliente
+POST http://localhost:3000/cliente
+Content-Type: application/json
+
+{
+  "nome": "Fernanda Souza",
+  "email": "fernanda.souza@outlook.com",
+  "senha": "pixel2026",
+  "cpf": "98765432100",
+  "telefone": "48988776655"
+}
+
+###
+
+### Fazer Login com Fernanda (Armazena o token automaticamente)
+
+# @name loginReq
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "fernanda.souza@outlook.com",
+    "senha": "pixel2026"
+}
+
+###
+
+### 2. Listar Clientes
+GET http://localhost:3000/clientes
+Authorization: {{loginReq.response.body.$.token}}
+Content-Type: application/json
+
+### 3. Consultar Cliente
+GET http://localhost:3000/cliente/1
+Authorization: {{loginReq.response.body.$.token}}
+Content-Type: application/json
+
+### 4. Apagar Cliente
+DELETE  http://localhost:3000/cliente/3
+Authorization: {{loginReq.response.body.$.token}}
+Content-Type: application/json
+
+
+
+###
+
+### 5. Cadastrar Console
+POST http://localhost:3000/console
+Authorization: {{loginReq.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "modelo": "Nintendo Switch OLED",
+  "marca": "Nintendo",
+  "numeroSerie": "XKW50012345678",
+  "tipo": "Mídia Física",
+  "idCliente": 1
+}
+
+### 6. Listar Consoles
+GET http://localhost:3000/consoles
+Authorization: {{loginReq.response.body.$.token}}
+Content-Type: application/json
+
+###
+
+### 7. Cadastrar Agendamento
+POST http://localhost:3000/agendamento
+Authorization: {{loginReq.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "data": "2026-11-18",
+  "hora": "09:00:00",
+  "idCliente": 1,
+  "idConsole": 1
+}
+
+### 8. Listar Agendamentos
+GET http://localhost:3000/agendamentos
+Authorization: {{loginReq.response.body.$.token}}
+Content-Type: application/json
+
+
+### 9. Atualizar Agendamento
+PUT http://localhost:3000/agendamento/1
+Content-Type: application/json
+Authorization: {{loginReq.response.body.$.token}}
+
+{
+    "data": "2026-11-25",
+    "hora": "10:45:00"
+}

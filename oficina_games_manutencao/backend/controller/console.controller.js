@@ -1,0 +1,63 @@
+const Console = require('../models/Console')
+const CryptoJS = require('crypto-js')
+const CHAVE_SECRETA = 'segredo'
+
+const cadastrar = async (req, res) => {
+    const valores = req.body
+
+    if (!valores.modelo || !valores.marca || !valores.numeroSerie || !valores.tipo || !valores.idCliente) {
+        return res.status(400).json({ message: 'Todos os campos são obrigatórios!' })
+    }
+
+    try {
+        const numeroSerieCriptografado = CryptoJS.AES.encrypt(valores.numeroSerie, CHAVE_SECRETA).toString()
+
+        await Console.create({
+            modelo: valores.modelo,
+            marca: valores.marca,
+            numeroSerie: numeroSerieCriptografado,
+            tipo: valores.tipo,
+            idCliente: valores.idCliente
+        })
+
+        return res.status(201).json({ message: 'Console cadastrado com sucesso!' })
+    } catch (err) {
+        console.error('Erro ao cadastrar cliente:', err)
+        return res.status(500).json({ message: 'Erro ao cadastrar console!' })
+    }
+}
+
+const listar = async (req, res) => {
+    try {
+        const consoles = await Console.findAll()
+        let resultado = []
+
+        consoles.forEach((el)=>{
+            let numeroDescript = ''
+            try{
+                const bytes = CryptoJS.AES.decrypt(el.numeroSerie, CHAVE_SECRETA)
+                numeroDescript = bytes.toString(CryptoJS.enc.Utf8)
+            }catch(err){
+                numeroDescript = 'Erro ao descriptografar numero'
+                console.error(numeroDescript, err)
+            }
+            resultado.push({
+                codConsole: el.codConsole,
+                modelo: el.modelo,
+                marca: el.marca,
+                numeroSerie: numeroDescript,
+                tipo: el.tipo,
+                idCliente: el.idCliente
+            })
+        })
+
+        return res.status(200).json(resultado)
+    } catch (err) {
+        console.error('Erro ao listar consoles:', err)
+        return res.status(500).json({ message: 'Erro ao listar consoles!' })
+    }
+}
+
+
+module.exports = {cadastrar, listar}
+
